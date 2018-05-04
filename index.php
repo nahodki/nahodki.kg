@@ -105,9 +105,6 @@ session_start();
 	</nav>
 </section>
 
-Baystan THE BEST
-
-Kuba THE LOX
 
   
 <div id="collapseTwo" class="collapse">
