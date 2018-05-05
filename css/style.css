@@ -303,6 +303,9 @@ textarea.form-control{
   .our{
     font-size: 12px
   }
+  .find h2{
+    font-size: 19px
+  }
 }
 
 @media screen and ( max-width: 800px) {
@@ -314,6 +317,9 @@ textarea.form-control{
   }
   .description{
   margin-top: 10px
+  }  
+  .find h2{
+    font-size: 19px
   }
 
   @media screen and ( max-width: 600px) {
@@ -325,6 +331,9 @@ textarea.form-control{
   }
   .description{
   margin-top: 10px
+  }
+  .find h2{
+    font-size: 19px
   }
 }
 

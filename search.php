@@ -372,6 +372,13 @@ $("#find").click(
    
 
 </script>
+<script type="text/javascript">
+  function exit() {
+    if(confirm('Вы точно хотите выйти?') == true) {
+      document.getElementById("ex").href = 'session_destroy.php';
+    }
+  }
+</script>
 </html>
 
 

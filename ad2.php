@@ -6,9 +6,9 @@ $connection = mysqli_connect("localhost", "root", "", "buronahodok");
 mysqli_set_charset($connection,'utf8');
 
     
-mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET['id']);
+$_SESSION['caption'] = $_POST['caption'];
+$_SESSION['des'] = $_POST['des'];
 
-  printf("Озгоргон жолчо (UPDATE): %d\n", mysqli_affected_rows($connection));
 
 if(isset($_POST['send']))
 {
@@ -53,7 +53,7 @@ $a = 0;
     $name = $_FILES['get_file'] ['name'];
   if ($a == 0) {
 
-
+    header('location:index.php');
 
     $result = mysqli_query($connection, "SELECT max(id) FROM ads");
     $row = mysqli_fetch_row($result);
@@ -62,15 +62,24 @@ $a = 0;
 
     copy($_FILES['get_file'] ['tmp_name'], 'img/'.$name);
 
+    if ($_FILES['get_file'] ['size'] == 0) {
+      $name = 'default.png';
+    }
+
 $query = "INSERT INTO ads(caption,city,data,nomer,des,category,id_category,picture) values('".$caption."','".$city."','".$_POST['data']."','".$number."','".$des."', '".$category."' , '".$_GET['id_categories']."','".$name."')"; 
 mysqli_query($connection, $query) or die("Катачылык кетти " . mysqli_error());
+
+mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET['id_categories']);
+
+ mysqli_affected_rows($connection);
+
+
 
  }
 }
 
 
 ?>
-
 
 
 
@@ -83,8 +92,13 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
   <link  href="css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/animate.css">
   <script type="js/javascript.js"></script>
+  <script src="css/wow.min.js"></script>
   <link href="css/bootstrap-fileupload.min.css" rel="stylesheet">
+              <script>
+              new WOW().init();
+              </script>
 </head>
 <body>
 
@@ -95,7 +109,7 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
 
                             <!-- HEADER -->
   <header class="header">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-inverse">
     <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed"
@@ -119,14 +133,14 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
 
     ?>
       <div class="user"><? echo $_SESSION['login'] ?></div>
-      <a href="session_destroy.php?id=1" class="btn btn-primary" onclick="exit()" id="ex">Выйти</a>
+      <a href="#" class="btn btn-primary border" onclick="exit()" id="ex">Выйти</a>
 
     <?
     }
     else {
       ?>
-        <a href="sign_in.php" class="btn btn-primary" id="login">Войти</a>
-      <a href="chek_in.php" class="btn btn-success" id="reg">Зарегистрироваться</a>
+        <a href="sign_in.php" class="btn btn-primary border" id="login">Войти</a>
+      <a href="chek_in.php" class="btn btn-success border" id="reg">Зарегистрироваться</a>
     <?
     }
     ?>
@@ -137,16 +151,16 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
 </header>
 
                                 <!-- SECTION2 -->
-<section class="section1" style="margin-top: 50px">
+<section class="section1">
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="row">
       <form class="navbar-form" action="search.php" method="POST">
-          <div class="col-md-3 col-sm-4 col-xs-6 bot">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Поиск" name="search">
+          <div class="col-md-5 col-sm-5 col-xs-6 bot">
+            <div class="group">
+              <input type="text" class="search" placeholder="Поиск" name="search">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                <button class="btn btn-default" type="submit" name="seke"><i class="fa fa-search"></i></button>
               </span>
             </div>
           </div>
@@ -156,17 +170,76 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
               <option value=2>Потерял</option>
             </select>
           </div>
-          <div class="col-md-6 col-sm-6 col-xs-12 bot">
-            <div class="form-control"><a href="get.html">Расширенный поиск</a></div>
+              </form>
+          <div class="col-md-3 col-sm-4 col-xs-12 bot">
+            <div class="form-control"><a data-toggle="collapse" href="#collapseTwo">Расширенный поиск</a></div>
           </div>
-
-      </form>
       </div>
     </div>
   </nav>
 </section>
 
 
+  
+<div id="collapseTwo" class="collapse">
+  <div class="search_glav">
+    <div class="container">
+      <form action="search.php" method="POST">
+    <div class="row bot">
+      <div class="col-md-5 col-sm-6 col-xs-12"><label>Город:</label></div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <select class="form-control" name="city">
+          <option value="0">Выбрать..</option>
+            <?php
+
+              $result = mysqli_query($connection, "SELECT * FROM region");
+              while ($row =mysqli_fetch_row($result)) {
+                echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+              }
+              ?>
+        </select>
+      </div>
+    </div>
+
+    <div class="row bot">
+      <div class="col-md-5 col-sm-6 col-xs-12"><label>Тип:</label></div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <select class="form-control" name="category">
+                  <option value="0">Выбрать..</option>
+                    <?php
+                    $result = mysqli_query($connection, "SELECT * FROM category_tip");
+                    while ($row =mysqli_fetch_row($result)) {
+                      echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+                    }
+                  ?>
+                </select>
+        </div>
+    </div>
+
+    <div class="row bot">
+      <div class="col-md-5 col-sm-6 col-xs-12"><label>Категория:</label></div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <select class="form-control" name="kat">
+            <option value="0">Выбрать..</option>
+              <?php
+
+                $result = mysqli_query($connection, "SELECT * FROM categories");
+                while ($row =mysqli_fetch_row($result)) {
+                  echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+                }
+                ?>
+          </select>
+        </div>
+    </div>
+    <div class="row bot">
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <input type="submit" class="form-control" name="search_rash">
+      </div>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
                                   <!-- NAVIGATION -->
 
 <div class="container">
@@ -222,7 +295,7 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
         <div class="col-md-12 col-sm-12 col-xs-12 forma">
           <div class="row bot">
             <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label class="cap">Заголовок объявления:<? echo $error[0]; ?></label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><input type="text" class="form-control" name="caption" id="caption"></div></div>
+            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><input type="text" class="form-control" name="caption" id="caption" value="<? echo $_SESSION['caption'] ?>"></div></div>
             <div id="cap_error"></div>
           </div> 
 
@@ -275,7 +348,7 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
 
           <div class="row bot">
             <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label>Описание:<? echo $error[4]; ?></label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><textarea class="form-control" name="des"></textarea></div></div>
+            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><textarea class="form-control" name="des"><? echo $_SESSION['des'] ?></textarea></div></div>
           </div>
 
           <div class="row bot">
@@ -320,14 +393,11 @@ mysqli_query($connection, $query) or die("Катачылык кетти " . mysq
 </body>
 
 <script type="text/javascript">
-  
-function login() {
-  var login = document.getElementById("login").style.display = 'block';
-}
-function reg() {
-  var reg = document.getElementById("reg").style.display = 'block';
-}
-
+  function exit() {
+    if(confirm('Вы точно хотите выйти?') == true) {
+      document.getElementById("ex").href = 'session_destroy.php';
+    }
+  }
 </script>
 </html>
 

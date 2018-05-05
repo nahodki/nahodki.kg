@@ -185,18 +185,18 @@ session_start();
 <main class="main">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 center plus wow fadeInLeft">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 center plus wow fadeInLeft">
 				<div id="find" class="find">
 					<h2><i class="fa fa-search-plus"></i> Нашёл</h2>
 				</div>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 plus center plus wow fadeInRight">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 plus center plus wow fadeInRight">
 				<div id="lost" class="find">
 					<h2><i class="fa fa-search-minus"></i> Потерял</h2>
 				</div>
 			</div>
       <a <? if (isset($_SESSION['login'])) { echo 'href="ad.php"';} else{echo 'href="chek_in.php"';} ?>>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 center wow fadeInUp">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 col-md-offset-3 col-sm-offset-3 col-xs-offset-2 center wow fadeInUp">
         <div class="ad find">
           <h2>Сделать Объявление</h2>
         </div>
@@ -220,22 +220,23 @@ session_start();
 <div class="col-md-12 col-sm-12 col-xs-12">
 <div class="row">
  <?php  
-    $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN categories ON ads.id_category=categories.id INNER JOIN category_tip ON ads.category=category_tip.id");
+    $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN categories ON ads.id_category=categories.id INNER JOIN category_tip ON ads.category=category_tip.id INNER JOIN region ON ads.category=region.id LIMIT 0,10");
      while ($row =mysqli_fetch_row($result)) {
 
       ?>
       <div class="col-md-12 col-sm-12 col-xs-12 wow flipInX">
         <div class="our">
           <div class="row">
-            <div class="img col-md-4 col-sm-5 col-xs-5"><img src="img/<? echo $row[8] ?>"></div>
+            <div class="img col-md-4 col-sm-5 col-xs-5"><img src="img/<? echo $row[8]; ?>"></div>
             <div class="col-md-8 col-sm-7 col-xs-7">
               <div class="row">
               <div class="caption center col-md-12"><h4><a href="index2.php?id=<? echo $row['0'] ?>"><? echo $row[3]; ?></a></h4></div>     
               <div class="date col-md-3 col-sm-3 col-xs-12">
                 <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-4"><? echo $row[1]; ?></div>     
-                  <div class="col-md-12 col-sm-12 col-xs-4"><? echo $row[10]; ?></div>     
-                  <div class="col-md-12 col-sm-12 col-xs-4"><? echo $row[13]; ?></div>     
+                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[1]; ?></div>     
+                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[10]; ?></div>     
+                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[13]; ?></div>     
+                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[15]; ?></div>     
                 </div> 
               </div>
               <?
