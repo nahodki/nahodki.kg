@@ -210,53 +210,87 @@ session_start();
 
 														<!-- SECTION3 -->
 
+
 <div class="result">
 
 <section class="content">
-	<div class="container">
-		<div class="row">
-		
+  <div class="container">
+    <div class="row">
+    
                                 <h1 class="center zag">Свежие объявления</h1>
 <div class="col-md-12 col-sm-12 col-xs-12">
 <div class="row">
  <?php  
-    $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN categories ON ads.id_category=categories.id INNER JOIN category_tip ON ads.category=category_tip.id INNER JOIN region ON ads.category=region.id LIMIT 0,10");
-     while ($row =mysqli_fetch_row($result)) {
+    $result1 = mysqli_query($connection, "SELECT * FROM ads INNER JOIN categories ON ads.id_category=categories.id INNER JOIN category_tip ON ads.category=category_tip.id INNER JOIN region ON ads.city=region.id");
+     while ($row1 =mysqli_fetch_row($result1)) {
+
 
       ?>
-      <div class="col-md-12 col-sm-12 col-xs-12 wow flipInX">
-        <div class="our">
-          <div class="row">
-            <div class="img col-md-4 col-sm-5 col-xs-5"><img src="img/<? echo $row[8]; ?>"></div>
-            <div class="col-md-8 col-sm-7 col-xs-7">
-              <div class="row">
-              <div class="caption center col-md-12"><h4><a href="index2.php?id=<? echo $row['0'] ?>"><? echo $row[3]; ?></a></h4></div>     
-              <div class="date col-md-3 col-sm-3 col-xs-12">
-                <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[1]; ?></div>     
-                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[10]; ?></div>     
-                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[13]; ?></div>     
-                  <div class="col-md-12 col-sm-12 col-xs-3"><? echo $row[15]; ?></div>     
-                </div> 
-              </div>
-              <?
-            $text = $row[6];
-            $text = mb_substr($text,0,160, 'UTF-8');
-              ?>
-              <div class="description col-md-9 col-sm-9 col-xs-12"><? echo $text.'...'; ?></div>  
-              </div>
-            </div>
-          </div>
+      <div class="row rt">
+      <ul class="col-xs-12 wow fadeInUp glav center ">
+          <li class="col-xs-2 data"><? echo $row1[1]; ?></li>
+          <li class="col-xs-2 <? if($row1[2] == 1) echo 'back'; else echo 'back2'?>"><? echo $row1[13]; ?></li>
+          <li class="col-xs-6 caption"><a data-toggle="collapse" href="#collapseInfo<?php echo $row1[0] ?>"><? echo $row1[3]; ?></a></li>
+          <li class="col-xs-2 city"><? echo $row1[15]; ?></li>
         </div>
-      </div>
-       <?
-        }
+      </ul>
+
+      
+      <div id="collapseInfo<?php echo $row1[0] ?>" class="collapse">
+      <div class="row pod <? if($row1[2] == 1) echo 'b1'; else echo 'b2' ?>">
+    <?php
+     $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN region ON ads.city=region.id WHERE ads.id=".$row1[0]);
+          while ($row =mysqli_fetch_row($result)) {
         ?>
+
+        <div><h2><? echo $row[3]; ?></h2></div>
+        <hr>
+
+
+         
+ 
+<div class="col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+      <ul class="info">
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Город:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[10]; ?></label></div>
+          </li> 
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Дата:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[1]; ?></label></div>
+          </li> 
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Номер:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[5]; ?></label></div>
+          </li> 
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Описание:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[6]; ?></label></div>
+          </li> 
+        </ul>
+        </div> 
+
+        <div class="col-md-6 col-sm-6 col-xs-12 bot">
+          <img src="img/<? echo $row[8]; ?>">
+        </div>
+</div>
+
+
+
+      </div> 
+      </div>
+<?
+}}
+?>
   </div>
 </div>
 
-		</div>
-	</div>
+    </div>
+  </div>
 </section> 
 
 

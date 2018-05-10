@@ -1,24 +1,34 @@
 *{box-sizing: border-box;}
 body{
-	height: 5000px;
-	font-size: 14px;
-	font-family: Arial, sans-serif;
+  height: 5000px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
 }
 label{
   font-weight: normal;
 }
 img{
-	width: 100%
+  width: 100%
 }
-.navbar-form{
-	margin-right: 0;
-	border: none;
+ul {
+  padding: 0;
+  margin: 0;
+}
+.panel-success > .panel-heading
+{
+  background-color:#00ADB5;
+  color: #fff;
+}
+a.list-group-item:hover, button.list-group-item:hover, a.list-group-item:focus, button.list-group-item:focus {
+    color: #555;
+    text-decoration: none;
+    background-color: #eee;
 }
 .bot{
-	margin-bottom: 10px
+  margin-bottom: 10px
 }
 .logo{
-	position: absolute;
+  position: absolute;
     width: 150px;
     top: -5px;
     left: 90px;
@@ -29,30 +39,34 @@ ul{
   margin: 0
 }
 
-			/*HEADER*/
-
+      /*HEADER*/
+.navbar-toggle {
+  background-color: #15d6ff;
+  border:  #15d6ff;
+}
+.navbar-toggle .icon-bar{
+  background-color: #fff
+}
 .form-group > label > h2 {
-	margin-right: 50px
+  margin-right: 50px
 }
-.header .navbar-form a{
-	color: #fff;
-}
+
 .navbar-form .btn a:hover{
-	text-decoration: none;
+  text-decoration: none;
 }
 .header .navbar-inverse{
   padding: 10px 0px;
 }
 .user{
-  font-size: 22px;
-  color: #fff;
+  font-size: 16px;
+  color: #0290c0;
   float: left;
+  margin-right: 20px
 }
 
 .group {
   border: 2px solid #00BCD4;
-  display: inline-table;
-  vertical-align: middle;
+  background-color: #00BCD4
 }
 .input-group-btn:last-child > .btn{
   background-color: #15d6ff;
@@ -60,16 +74,13 @@ ul{
   border-radius: 0;
 }
 .search{
-  display: block;
-    width: 100%;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
-    line-height: 1.42857143;
     color: #555;
     background-color: #fff;
-    background-image: none;
     border: 1px solid #ccc;
+    float: left;
 }
 .search_glav{
   background-color: #f8f8f8;
@@ -81,31 +92,93 @@ ul{
   border-radius: 0;
   transition: 1s;
 }
-
-			/*SECTION1*/
-
-.top{
-  margin-top: 30px
+.account_icon{
+  width: 40px;
+}
+.ad{
+  float: left;
+  padding: 10px;
+  background-color: #ff8300;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.ad p{
+  margin: 0;
+  padding: 0;
+  color: #fff
+}
+.language{
+  color: grey;
+  padding: 10px;
+  float: left;
+}
+.navbar-form .input-group {
+  background-color: #49aeef;
+  padding: 5px;
+  width: 100%
+}
+.poisk {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.user_1{
+  float: left;
+}
+.glav{
+  border: 1px solid rgba(0,0,0,0.16);
+  border-bottom: none;
+}
+.rt ul:last-child{
+  border-bottom: 1px solid rgba(0,0,0,0.16);
+}
+.center li{
+  border-right:1px solid rgba(0,0,0,0.16);
+  padding: 10px 5px
+}
+.back{
+  background-color: #64e2ff
+}
+.back2{
+  background-color: #ff7e7e
+}
+.center li:last-child{
+  border-right: none;
 }
 
-			/* MAIN */
+
+      /*SECTION1*/
+
+      /* MAIN */
 
 .center{
-	text-align: center;
+  text-align: center;
 }
 .main{
-  background-color: #00ADB5;
+  background-color: #00bdd0;
   padding: 100px 0;
 }
 .main h2{
-	margin: 0;
+  margin: 0;
 }
 .main .find a:hover{
-	text-decoration: none;
+  text-decoration: none;
 }
 .main .find{
-	width: 100%;
-	padding: 20px;
+  width: 100%;
+  padding: 20px;
   border-radius: 50px;
   border: 4px solid #fff;
   background-color: transparent;
@@ -114,7 +187,7 @@ ul{
   cursor: pointer;
 }
 .main .plus{
-	margin-bottom: 10px
+  margin-bottom: 10px
 }
 .main .find:hover{
   background-color: #fff;
@@ -122,9 +195,9 @@ ul{
 }
 
 
-		/*SECTION3*/
+    /*SECTION3*/
 .content{
-  background-color: #d4effa;
+  background-color: #fff;
   padding: 70px 0;
 }
 .our{
@@ -144,41 +217,41 @@ ul{
   margin-bottom: 50px
 }
 .media:first-child{
-	margin-top: 15px
+  margin-top: 15px
 }
 .media-list{
-	border-bottom: 1px solid #d6e9c6;
+  border-bottom: 1px solid #d6e9c6;
 }
 .media-list:last-child{
-	border-bottom: none;
+  border-bottom: none;
 }
 .table tr:first-child{
-	border: 0;
+  border: 0;
 }
 .table td{
-	border: 1px solid #d6e9c6;
+  border: 1px solid #d6e9c6;
 }
 .min{
-	min-height: 400px
+  min-height: 400px
 }
 .navigation{
-	font-size: 20px
+  font-size: 20px
 }
 .forma label{
-	font-size: 20px;
-	font-weight: normal;
+  font-size: 20px;
+  font-weight: normal;
 }
 .forma .bot{
-	margin-bottom: 15px
+  margin-bottom: 15px
 }
 .forma .cap{
-	font-weight: bold;
+  font-weight: bold;
 }
 textarea.form-control{
-	min-height: 200px
+  min-height: 200px
 }
 .right{
-	float: right;
+  float: right;
 }
 .midlle{
   width: 50%;
@@ -190,15 +263,21 @@ textarea.form-control{
 }
 .info li{
   padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
-.info li:nth-child(odd) {
-  background-color: #e9e2ac;
+.info li:last-child{
+  border-bottom: none;
 }
-.info li:nth-child(even) {
-  background-color: #e9e2ac;
+.b1{
+  border-left: 5px solid #64e2ff;
 }
-
-				/*LOGIN*/
+.b2{
+  border-left: 5px solid #ff7e7e;
+}
+hr{
+  border:2px solid #eee;
+}
+        /*LOGIN*/
 .error{
     color: red;
     font-size: 13px;
@@ -239,10 +318,10 @@ textarea.form-control{
 }
 
 .form h2{
-	color: #337ab7;
+  color: #337ab7;
 }
 .reg h2{
-	color: #5cb85c;
+  color: #5cb85c;
 }
 .form button {
   font-family: "Roboto", sans-serif;
@@ -259,7 +338,13 @@ textarea.form-control{
   cursor: pointer;
 }
 .reg button{
-	background-color: #5cb85c;
+  background-color: #5cb85c;
+}
+.pod{
+  padding: 10px
+}
+.pod h2{
+  margin-left: 10px
 }
 
         /*COMMENTS*/
@@ -281,13 +366,10 @@ textarea.form-control{
 .footer p{
   margin-top: 13px
 }
-.mainq {
-  color: red;
-}
 
-.main--main-bg {
-  background-color: green;
-}
+
+
+
 
                         /*MEDIA*/
 
@@ -300,41 +382,28 @@ textarea.form-control{
   .form{
     margin-left: 25%;
   }
-  .our{
-    font-size: 12px
-  }
-  .find h2{
-    font-size: 19px
-  }
 }
 
-@media screen and ( max-width: 800px) {
+@media screen and ( max-width: 790px) {
   .form{
     margin-left: 3%;
   }
-  .our{
+  .glav{
     font-size: 10px
   }
-  .description{
-  margin-top: 10px
-  }  
-  .find h2{
-    font-size: 19px
-  }
-
-  @media screen and ( max-width: 600px) {
+  @media screen and ( max-width: 450px) {
   .form{
     margin-left: 0;
   }
-  .our{
-    font-size: 8px
-  }
-  .description{
-  margin-top: 10px
-  }
-  .find h2{
-    font-size: 19px
+  .glav{
+    font-size: 5px
   }
 }
+
+@media (min-width: 768px) {
+.navbar-form .input-group .input-group-btn {
+    width: none;
+}
+
 
 
