@@ -34,32 +34,41 @@ session_start();
 
 
                             <!-- HEADER -->
-  <header class="header">
-  <nav class="navbar navbar-inverse">
+     <header class="header">
+  <nav class="navbar">
     <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed"
-       data-toggle="collapse"
-       data-target="#bs-example-navbar-collapse-1"
-       aria-expanded="false">
-       <span class="sr-only">Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="logo"><img src="img/logo.png"></span>
+      <span><img class="logo" src="img/logo.png"></span>
     </div>
-
-        <div class="collapse navbar-collapse"
-         id="bs-example-navbar-collapse-1">
     <div class="navbar-form navbar-right">
     <?php  
 
       if(isset($_SESSION['login'])) {
 
     ?>
-      <div class="user"><? echo $_SESSION['login'] ?></div>
-      <a href="#" class="btn btn-primary border" onclick="exit()" id="ex">Выйти</a>
+    <div class="user_1 btn-group">
+      <div class="user" data-toggle="dropdown"><img class="account_icon" src="img/acc.jpg"> <? echo $_SESSION['login'] ?>
+      <span class="caret"></span>
+      </div>
+  <ul class="dropdown-menu">
+    <li><a href="#">Мой профиль</a></li>
+    <li><a href="#">Мои объявления</a></li>
+    <li class="divider"></li>
+    <li><a href="#" onclick="exit()" id="ex">Выйти</a></li>
+  </ul>
+
+
+      <a <? if (isset($_SESSION['login'])) { echo 'href="ad.php"';} else{echo 'href="chek_in.php"';} ?>>
+        <div class="ad">
+          <p><i class="fa fa-plus"></i> Сделать Объявление</p>
+        </div>
+      </a>
+
+      <div class="language">
+        Кырг / Русс
+      </div>
+
+
 
     <?
     }
@@ -71,8 +80,6 @@ session_start();
     }
     ?>
     </div>
-</div>
-  </div>
   </nav>
 </header>
 
@@ -81,24 +88,24 @@ session_start();
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="row">
-      <form class="navbar-form" action="search.php" method="POST">
-          <div class="col-md-5 col-sm-5 col-xs-6 bot">
-            <div class="group">
-              <input type="text" class="search" placeholder="Поиск" name="search">
-              <span class="input-group-btn">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+         <form class="navbar-form" action="search.php" method="POST">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Поиск">
+              <div class="input-group-btn">
+                <select class="search" name="aa">
+                  <option value=1>Нашёл</option>
+                  <option value=2>Потерял</option>
+                  </select>
+              </div>
+              <div class="input-group-btn">
                 <button class="btn btn-default" type="submit" name="seke"><i class="fa fa-search"></i></button>
-              </span>
+              </div>
             </div>
-          </div>
-          <div class="col-md-2 col-sm-2 col-xs-6 bot">
-            <select  class="form-control" name="aa">
-              <option value=1>Нашёл</option>
-              <option value=2>Потерял</option>
-            </select>
-          </div>
-              </form>
+          </form>
+        </div>
           <div class="col-md-3 col-sm-4 col-xs-12 bot">
-            <div class="form-control"><a data-toggle="collapse" href="#collapseTwo">Расширенный поиск</a></div>
+            <div class="poisk"><a data-toggle="collapse" href="#collapseTwo">Расширенный поиск</a></div>
           </div>
       </div>
     </div>
@@ -237,7 +244,15 @@ session_start();
 
 
 
-
+<footer class="footer">
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="row">
+        <div class="center"><p>Copyright © 2018</p></div> 
+      </div>
+    </div>
+  </div>
+</footer>
 
 
 

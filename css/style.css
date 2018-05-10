@@ -28,10 +28,7 @@ a.list-group-item:hover, button.list-group-item:hover, a.list-group-item:focus, 
   margin-bottom: 10px
 }
 .logo{
-  position: absolute;
-    width: 150px;
-    top: -5px;
-    left: 90px;
+    width: 180px
 }
 ul{
   list-style: none;
@@ -40,6 +37,10 @@ ul{
 }
 
       /*HEADER*/
+
+.navbar-right .dropdown-menu{
+  right: unset;
+}
 .navbar-toggle {
   background-color: #15d6ff;
   border:  #15d6ff;
@@ -52,7 +53,7 @@ ul{
 }
 
 .navbar-form .btn a:hover{
-  text-decoration: none;
+  text-decoration: none
 }
 .header .navbar-inverse{
   padding: 10px 0px;
@@ -124,6 +125,7 @@ ul{
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
+    margin-top: 9px;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
@@ -196,6 +198,9 @@ ul{
 
 
     /*SECTION3*/
+.vip{
+  background-color: #f3ef92;
+}
 .content{
   background-color: #fff;
   padding: 70px 0;
@@ -298,6 +303,7 @@ hr{
   display: block;
   z-index: 1;
   background: #FFFFFF;
+  margin-bottom: 30px;
   margin-left: 35%;
   max-width: 500px;
   padding: 45px;
@@ -365,6 +371,11 @@ hr{
                 /*FOOTER*/
 .footer p{
   margin-top: 13px
+}
+
+
+.navbar-default .navbar-form{
+  border: none;
 }
 
 
