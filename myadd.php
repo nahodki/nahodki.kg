@@ -180,37 +180,61 @@ session_start();
 <div class="container">
   <div class="row">
     <ol class="breadcrumb">
-      <li><a href="#">Главная</a></li>
-      <li class="active">Объявления</li>
+      <li><a href="index.php">Главная</a></li>
+      <li class="active">Мои объявления</li>
   </ol>
   </div>
 </div>
 
 
 
-		
-														<!-- SECTION3 -->
+ <section class="top">
+  <div class="container">
+    <div class="row">
+    
+                                <h1 class="center zag">Мои объявления</h1>
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="row">
+ <?php  
+    $result1 = mysqli_query($connection, "SELECT * FROM ads INNER JOIN categories ON ads.id_category=categories.id INNER JOIN category_tip ON ads.category=category_tip.id INNER JOIN region ON ads.city=region.id WHERE ads.id_user =".$_SESSION['user_id']);
+     while ($row1 =mysqli_fetch_row($result1)) {
 
-<section>
-	<div class="container">
-		<div class="row">
+
+      ?>
+      <div class="row rt">
+      <ul class="col-xs-12 wow fadeInUp glav center ">
+          <li class="col-xs-2 data"><? echo $row1[1]; ?></li>
+          <li class="col-xs-2 <? if($row1[2] == 1) echo 'back'; else echo 'back2'?>"><? echo $row1[15]; ?></li>
+          <li class="col-xs-6 caption"><a data-toggle="collapse" href="#collapseInfo<?php echo $row1[0] ?>"><? echo $row1[3]; ?></a></li>
+          <li class="col-xs-2 city"><? echo $row1[15]; ?><a class="delete"  href="add_delet.php?id=<? echo $row1[0]; ?>"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+        </div>
+      </ul>
+      <!-- <script type="text/javascript">
+      onclick="delet(<? //echo $row1[0]; ?>)" id="dele"
+        function delet(s) {
+          if(confirm('Вы точно хотите удалить?') == true) {
+            document.getElementById("dele").href = 'add_delet.php?id='+s;
+          }
+        }
+      </script> -->
+
+      
+      <div id="collapseInfo<?php echo $row1[0] ?>" class="collapse">
+      <div class="row pod <? if($row1[2] == 1) echo 'b1'; else echo 'b2' ?>">
     <?php
-     $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN region ON ads.city=region.id WHERE ads.id=".$_GET['id']);
+     $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN region ON ads.city=region.id WHERE ads.id=".$row1[0]);
           while ($row =mysqli_fetch_row($result)) {
         ?>
-        <div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-3 col-sm-offset-3 bot">
-          <img src="img/01.jpg">
-        </div>
 
-		</div>
+        <div><h2><? echo $row[3]; ?></h2></div>
+        <hr>
 
-      <div class="col-md-12 col-sm-12 col-xs-12">
+
+         
+ 
+<div class="col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
       <ul class="info">
-          <li class="row">
-            <div class="col-md-5 col-sm-6 col-xs-12"><label class="cap">Заголовок объявления:</label></div>
-            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[3]; ?></label></div>
-          </li> 
-
           <li class="row">
             <div class="col-md-5 col-sm-6 col-xs-12"><label>Город:</label></div>
             <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[10]; ?></label></div>
@@ -231,14 +255,26 @@ session_start();
             <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[6]; ?></label></div>
           </li> 
         </ul>
+        </div> 
+
+        <div class="col-md-6 col-sm-6 col-xs-12 bot">
+          <img src="img/<? echo $row[8]; ?>">
+        </div>
+</div>
+
+
+
+      </div> 
+      </div>
 <?
-}
+}}
 ?>
+  </div>
+</div>
+
     </div>
   </div>
 </section> 
-
-                                                          <!-- COMMENTS -->
 
                           
 
@@ -284,6 +320,7 @@ function reg() {
     }
   }
 </script>
+
 </html>
 
 

@@ -4,12 +4,12 @@
 
 session_start();
 
-if ($_GET[id]) {
+// if ($_GET[id]) {
   
-}
-else{
+// }
+// else{
 session_destroy();
-}
+// }
 
 ?>
 

@@ -89,13 +89,7 @@ session_start();
       <div class="col-md-6 col-sm-6 col-xs-12">
          <form class="navbar-form" action="search.php" method="POST">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Поиск">
-              <div class="input-group-btn">
-                <select class="search" name="aa">
-                  <option value=1>Нашёл</option>
-                  <option value=2>Потерял</option>
-                  </select>
-              </div>
+              <input type="text" class="form-control" placeholder="Поиск" name="search">
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit" name="seke"><i class="fa fa-search"></i></button>
               </div>
@@ -185,29 +179,7 @@ session_start();
 
 
                             <!-- MAIN -->
-<main class="main">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 center plus wow fadeInLeft">
-        <div id="find" class="find">
-          <h2><i class="fa fa-search-plus"></i> Нашёл</h2>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 plus center plus wow fadeInRight">
-        <div id="lost" class="find">
-          <h2><i class="fa fa-search-minus"></i> Потерял</h2>
-        </div>
-      </div>
-      <a <? if (isset($_SESSION['login'])) { echo 'href="ad.php"';} else{echo 'href="chek_in.php"';} ?>>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 center wow fadeInUp">
-        <div class="ad find">
-          <h2>Сделать Объявление</h2>
-        </div>
-      </div>
-      </a>
-    </div>
-  </div>
-</main>
+
 
 
 
@@ -239,36 +211,93 @@ $sp = strpos($name, ' ')+1;
 $first = substr($name, 0, strpos($name, ' '));
 $second = substr($name, $sp);
 
-      $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN categories ON ads.id_category=categories.id INNER JOIN category_tip ON ads.category=category_tip.id WHERE caption LIKE '$name%' AND category_tip.id=".$_POST['aa']);
-  while ($row = mysqli_fetch_row($result)) {
 ?>
-      <div class="col-md-12 col-sm-12 col-xs-12 wow flipInX">
-        <div class="our">
-          <div class="row">
-            <div class="img col-md-4"><img src="img/<? echo $row[8] ?>"></div>
-            <div class="col-md-8">
-              <div class="row">
-              <div class="caption center col-md-12"><h4><a href="index2.php?id=<? echo $row['0'] ?>"><? echo $row[3]; ?></a></h4></div>     
-              <div class="date col-md-3">
-                <div class="row">
-                  <div class="col-md-12"><? echo $row[1]; ?></div>     
-                  <div class="col-md-12"><? echo $row[10]; ?></div>     
-                </div> 
-              </div>
-              <div class="description col-md-9"><? echo $row[6]; ?></div>  
-              </div>
-            </div>
-          </div>
+      <section class="top">
+  <div class="container">
+    <div class="row">
+    
+                                <h1 class="center zag">Свежие объявления</h1>
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="row">
+ <?php  
+    $result1 = mysqli_query($connection, "SELECT * FROM ads INNER JOIN categories ON ads.id_category=categories.id INNER JOIN category_tip ON ads.category=category_tip.id INNER JOIN region ON ads.city=region.id WHERE ads.caption LIKE '$name%'");
+     while ($row1 =mysqli_fetch_row($result1)) {
+
+
+      ?>
+      <div class="row rt">
+      <ul class="col-xs-12 wow fadeInUp glav center ">
+          <li class="col-xs-2 data"><? echo $row1[1]; ?></li>
+          <li class="col-xs-2 <? if($row1[2] == 1) echo 'back'; else echo 'back2'?>"><? echo $row1[13]; ?></li>
+          <li class="col-xs-6 caption"><a data-toggle="collapse" href="#collapseInfo<?php echo $row1[0] ?>"><? echo $row1[3]; ?></a></li>
+          <li class="col-xs-2 city"><? echo $row1[15]; ?></li>
         </div>
+      </ul>
+
+      
+      <div id="collapseInfo<?php echo $row1[0] ?>" class="collapse">
+      <div class="row pod <? if($row1[2] == 1) echo 'b1'; else echo 'b2' ?>">
+    <?php
+     $result = mysqli_query($connection, "SELECT * FROM ads INNER JOIN region ON ads.city=region.id WHERE ads.id=".$row1[0]);
+          while ($row =mysqli_fetch_row($result)) {
+        ?>
+
+        <div><h2><? echo $row[3]; ?></h2></div>
+        <hr>
+
+
+         
+ 
+<div class="col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+      <ul class="info">
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Город:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[10]; ?></label></div>
+          </li> 
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Дата:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[1]; ?></label></div>
+          </li> 
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Номер:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[5]; ?></label></div>
+          </li> 
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Описание:</label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[6]; ?></label></div>
+          </li> 
+        </ul>
+        </div> 
+
+        <div class="col-md-6 col-sm-6 col-xs-12 bot">
+          <img src="img/<? echo $row[8]; ?>">
+        </div>
+</div>
+
+
+
+      </div> 
       </div>
+<?
+}}
+?>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section> 
+
        <?
         }
         ?>
   </div>
 </div>
-<?
-}
-?>
+
 
 
 <?php
@@ -316,7 +345,10 @@ if (isset( $_POST['search_rash'])) {
 
 
 
-
+</div>
+</div>
+</section>
+</div>
 
 <footer class="footer">
   <div class="navbar navbar-default">

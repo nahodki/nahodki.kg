@@ -3,7 +3,9 @@
 $connection = mysqli_connect("localhost", "root", "", "buronahodok");
 mysqli_set_charset($connection,'utf8');
 
+
 if (isset($_POST['chek_in'])) {
+
 
 
 $error = array();
@@ -49,6 +51,9 @@ $a = 0;
 if ($a == 0) {
       $query = "INSERT INTO users(login,pass,number,email) values('".$_POST['login']."','".md5($_POST['pass'])."','".$_POST['number']."','".$_POST['email']."')"; 
     mysqli_query($connection, $query) or die("Катачылык кетти " . mysqli_error());
+      $result_user = mysqli_query($connection, "SELECT max(id) FROM users");
+        $row_user =mysqli_fetch_row($result_user);
+        $_SESSION['user_id'] = $row_user[0];
 
     $_SESSION['login'] = $_POST['login'];
     header('location:index.php');

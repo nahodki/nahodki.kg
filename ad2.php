@@ -72,7 +72,7 @@ $a = 0;
       $name = 'default.png';
     }
 
-$query = "INSERT INTO ads(caption,city,data,nomer,des,category,id_category,picture,vip) values('".$caption."','".$city."','".$_POST['data']."','".$number."','".$des."', '".$category."' , '".$_GET['id_categories']."','".$name."','".$chek."')"; 
+$query = "INSERT INTO ads(caption,city,data,nomer,des,category,id_category,picture,vip,id_user) values('".$caption."','".$city."','".$_POST['data']."','".$number."','".$des."', '".$category."' , '".$_GET['id_categories']."','".$name."','".$chek."','".$_SESSION['user_id']."')"; 
 mysqli_query($connection, $query) or die("Катачылык кетти " . mysqli_error());
 
 mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET['id_categories']);
@@ -260,14 +260,7 @@ mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET[
     <ol class="breadcrumb">
       <li><a href="index.php">Главная</a></li>
       <li><a href="ad.php">Сделать Объявление</a></li>
-      <?php
-
-        $result = mysqli_query($connection, "SELECT * FROM subcategory WHERE id=".$_GET['id_subcategory']);
-        while ($row =mysqli_fetch_row($result)) {
-        echo '<li class="active">'.$row[1].'</li>';
-      }
-      ?>
-  </ol>
+    </ol>
   </div>
 </div>
                                <!-- SECTION3 -->
@@ -287,13 +280,10 @@ mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET[
         $result = mysqli_query($connection, "SELECT * FROM categories WHERE id=".$_GET['id_categories']);
         while ($row =mysqli_fetch_row($result)) {
 
-        $result1 = mysqli_query($connection, "SELECT * FROM subcategory WHERE id=".$_GET['id_subcategory']);
-        while ($row1 =mysqli_fetch_row($result1)) {
-
       ?>
-      <h2>Категория: <span class="navigation"><a href="ad.php"><? echo $row[1]; ?></a></span><span class="navigation"> / <? echo $row1[1]; ?></span></h2>
+      <h2>Категория: <span class="navigation"><a href="ad.php"><? echo $row[1]; ?></a></span></h2>
       <?
-      }}
+      }
       ?>
     </div>
   </div>
@@ -304,17 +294,17 @@ mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET[
 	<div class="container">
 		<div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <form  method="POST" enctype="multipart/form-data" action="ad2.php?id_categories=<? echo $_GET['id_categories'] ?> && id_subcategory=<? echo $_GET['id_subcategory'] ?>">
+        <form  method="POST" enctype="multipart/form-data" action="ad2.php?id_categories=<? echo $_GET['id_categories'] ?>">
         <div class="col-md-12 col-sm-12 col-xs-12 forma">
           <div class="row bot">
-            <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label class="cap">Заголовок объявления:<? echo $error[0]; ?></label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><input type="text" class="form-control" name="caption" id="caption" value="<? echo $_SESSION['caption'] ?>"></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><label class="cap">Заголовок объявления:<? echo $error[0]; ?></label></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><input type="text" class="form-control" name="caption" id="caption" value="<? echo $_SESSION['caption'] ?>"></div></div>
             <div id="cap_error"></div>
           </div> 
 
           <div class="row bot">
-            <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label>Город:<? echo $error[1]; ?></label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><label>Город:<? echo $error[1]; ?></label></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="row">
                 <select class="form-control" name="city">
                   <option value="0">Выбрать..</option>
@@ -331,15 +321,15 @@ mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET[
           </div>
 
           <div class="row bot">
-            <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label>Дата:</label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><input type="date" class="form-control" name="data"></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><label>Дата:</label></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><input type="date" class="form-control" name="data"></div></div>
           </div>
 
           <div class="row bot">
-            <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label>Категория:<? echo $error[2]; ?></label></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><label>Категория:<? echo $error[2]; ?></label></div></div>
 
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="row">
                 <select class="form-control" name="category">
                   <option value="0">Выбрать..</option>
@@ -355,18 +345,18 @@ mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET[
           </div>
 
           <div class="row bot">
-            <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label>Номер:<? echo $error[3]; ?></label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><input type="text" class="form-control" name="nomer" value="+996"></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><label>Номер:<? echo $error[3]; ?></label></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><input type="text" class="form-control" name="nomer" value="+996"></div></div>
           </div>
 
           <div class="row bot">
-            <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label>Описание:<? echo $error[4]; ?></label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><textarea class="form-control" name="des"><? echo $_SESSION['des'] ?></textarea></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><label>Описание:<? echo $error[4]; ?></label></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><textarea class="form-control" name="des"><? echo $_SESSION['des'] ?></textarea></div></div>
           </div>
 
           <div class="row bot">
-            <div class="col-md-5 col-sm-6 col-xs-12"><div class="row"><label>Добавить картинку:</label></div></div>
-            <div class="col-md-4 col-sm-6 col-xs-12"><div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row"><label>Добавить картинку:</label></div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><div class="row">
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                   <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
                     <div>
@@ -378,7 +368,7 @@ mysqli_query($connection, "UPDATE categories SET found=found+1 WHERE id=".$_GET[
 
           <div class="center"><h2>VIP</h2><input type="checkbox" name="chek" class="form-control"></div>
 
-          <div class="row col-md-offset-8 col-sm-offset-10 col-xs-offset-10">
+          <div class="row col-md-offset-11 col-sm-offset-10">
             <button type="submit" class="btn btn-primary" name="send">Отправить</button>
           </div>
         </div>

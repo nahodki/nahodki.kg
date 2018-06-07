@@ -1,6 +1,5 @@
 *{box-sizing: border-box;}
 body{
-  height: 5000px;
   font-size: 14px;
   font-family: Arial, sans-serif;
 }
@@ -72,7 +71,6 @@ ul{
 .input-group-btn:last-child > .btn{
   background-color: #15d6ff;
   color: #fff;
-  border-radius: 0;
 }
 .search{
     height: 34px;
@@ -113,11 +111,6 @@ ul{
   padding: 10px;
   float: left;
 }
-.navbar-form .input-group {
-  background-color: #49aeef;
-  padding: 5px;
-  width: 100%
-}
 .poisk {
     display: block;
     width: 100%;
@@ -142,6 +135,7 @@ ul{
 .glav{
   border: 1px solid rgba(0,0,0,0.16);
   border-bottom: none;
+  position: relative;
 }
 .rt ul:last-child{
   border-bottom: 1px solid rgba(0,0,0,0.16);
@@ -162,7 +156,13 @@ ul{
 
 
       /*SECTION1*/
-
+.delete{
+  font-size: 40px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  color: red;
+}
       /* MAIN */
 
 .center{
@@ -198,12 +198,33 @@ ul{
 
 
     /*SECTION3*/
+.m{
+  margin-bottom: 0px;
+}
 .vip{
-  background-color: #f3ef92;
+  background-color:#01f3ff;
+}
+a.list-group-item:hover{
+  background-color: #c5fbf1
+}
+a.list-group-item:hover .arrow{
+  right: 10px
+}
+a.list-group-item{
+  overflow: hidden;
 }
 .content{
   background-color: #fff;
   padding: 70px 0;
+}
+.arrow{
+  position: absolute;
+  right: 20px;
+  transition: 0.5s
+}
+.list-group i{
+  font-size: 20px;
+  color: #00adb5
 }
 .our{
     background-color: #fff;
@@ -262,10 +283,6 @@ textarea.form-control{
   width: 50%;
   text-align: center; 
 }
-.error{
-  font-size: 20px;
-  color: red
-}
 .info li{
   padding: 10px;
   border-bottom: 1px solid #ddd;
@@ -288,6 +305,9 @@ hr{
     font-size: 13px;
     position: absolute;
     right: 50px;
+}
+.bot .error{
+    margin-top: 10px
 }
 .error_s{
     color: red;
@@ -402,6 +422,13 @@ hr{
   .glav{
     font-size: 10px
   }
+  .delete{
+    font-size: 30px;
+    position: absolute;
+    top: -5px;
+    right: -7px;
+    color: red;
+  }
   @media screen and ( max-width: 450px) {
   .form{
     margin-left: 0;
@@ -409,11 +436,13 @@ hr{
   .glav{
     font-size: 5px
   }
-}
-
-@media (min-width: 768px) {
-.navbar-form .input-group .input-group-btn {
-    width: none;
+  .delete{
+    font-size: 15px;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    color: red;
+  }
 }
 
 

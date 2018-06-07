@@ -198,49 +198,29 @@ session_start();
 														
 
 <section>
-	<div class="container">
-		<div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-<?php
+<div class="container">
+<div class="row">
+<div class="col-ms-12 col-sm-12 col-xs-12">
+  <div class="panel panel-success">
+    <div class="panel-heading">Сделать объявление</div>
+    <ul class="list-group">
 
-    $result = mysqli_query($connection, "SELECT * FROM categories");
-  while ($row =mysqli_fetch_row($result)) {
-  
+      <?php
+      $result = mysqli_query($connection, "SELECT * FROM categories");
+      while ($row =mysqli_fetch_row($result)) {
 
-?>
-      <div class="col-md-3 col-sm-3 col-xs-6 min">
-        <div class="panel panel-success">
-          <div class="panel-heading"><? echo $row[1]; ?></div>
+        ?>
+        <a href="ad2.php?id_categories=<? echo $row[0] ?>" class="list-group-item"><? echo $row[1]; ?><i class="fa fa-chevron-circle-right arrow" aria-hidden="true"></i></a>
 
-
-<?
-  $result1 = mysqli_query($connection, "SELECT * FROM subcategory WHERE id_category=".$row[0]);
-  while ($row1 =mysqli_fetch_row($result1)) {
-
-    ?>
-
-          <ul class="list-group">
-            <a href="ad2.php?id_categories=<? echo $row[0] ?> && id_subcategory=<? echo $row1[0] ?>" class="list-group-item"><? echo $row1[1]; ?></a>
-          </ul>
-<?
-}
-?>
-
-
-        </div>
-      </div>
-<?
-}
-?>
-
-    </div>
+        <?
+      }
+      ?>
+    </ul>
   </div>
-
-
-		</div>
-	</div>
-</section> 
+  </div>
+  </div>
+</div>
+</section>
 
 
 

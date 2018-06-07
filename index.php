@@ -51,8 +51,8 @@ session_start();
       <span class="caret"></span>
       </div>
   <ul class="dropdown-menu">
-    <li><a href="#">Мой профиль</a></li>
-    <li><a href="#">Мои объявления</a></li>
+    <li><a href="myprofile.php">Мой профиль</a></li>
+    <li><a href="myadd.php">Мои объявления</a></li>
     <li class="divider"></li>
     <li><a href="#" onclick="exit()" id="ex">Выйти</a></li>
   </ul>
@@ -96,19 +96,13 @@ session_start();
 
                                 <!-- SECTION2 -->
 <section class="section1">
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default m">
     <div class="container">
       <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-12">
          <form class="navbar-form" action="search.php" method="POST">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Поиск">
-              <div class="input-group-btn">
-                <select class="search" name="aa">
-                  <option value=1>Нашёл</option>
-                  <option value=2>Потерял</option>
-                  </select>
-              </div>
+              <input type="text" class="form-control" placeholder="Поиск" name="search">
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit" name="seke"><i class="fa fa-search"></i></button>
               </div>
@@ -120,6 +114,11 @@ session_start();
           </div>
       </div>
     </div>
+    <div class="container">
+        <ol class="breadcrumb">
+      <li><a href="index.php">Главная</a></li>
+  </ol>
+</div>
   </nav>
 </section>
 
@@ -190,27 +189,21 @@ session_start();
 
                                   <!-- NAVIGATION -->
 
-<div class="container">
-  <div class="row">
-    <ol class="breadcrumb">
-      <li><a href="index.php">Главная</a></li>
-  </ol>
-  </div>
-</div>
+
 
 
                             <!-- MAIN -->
 <main class="main">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 center plus wow fadeInLeft">
-        <div id="find" class="find">
-          <h2><i class="fa fa-search-plus"></i> Нашёл</h2>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 plus center plus wow fadeInRight">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 plus center plus wow fadeInLeft">
         <div id="lost" class="find">
           <h2><i class="fa fa-search-minus"></i> Потерял</h2>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 center plus wow fadeInRight">
+        <div id="find" class="find">
+          <h2><i class="fa fa-search-plus"></i> Нашёл</h2>
         </div>
       </div>
     </div>
@@ -237,12 +230,12 @@ session_start();
 
 
       ?>
-      <div class="row rt <? if($row1[9] == 1) echo 'vip'; ?>">
-      <ul class="col-xs-12 wow fadeInUp glav center ">
+      <div class="row rt">
+      <ul class="col-xs-12 wow fadeInUp glav center <? if($row1[9] == 1) echo 'vip'; ?>">
           <li class="col-xs-2 data"><? echo $row1[1]; ?></li>
-          <li class="col-xs-2 <? if($row1[2] == 1) echo 'back'; else echo 'back2'?>"><? echo $row1[14]; ?></li>
+          <li class="col-xs-2 <? if($row1[2] == 1) echo 'back'; else echo 'back2'?>"><? echo $row1[15]; ?></li>
           <li class="col-xs-6 caption"><a data-toggle="collapse" href="#collapseInfo<?php echo $row1[0] ?>"><? echo $row1[3]; ?></a></li>
-          <li class="col-xs-2 city"><? echo $row1[16]; ?></li>
+          <li class="col-xs-2 city"><? echo $row1[17]; ?></li>
       </ul>
       </div>
 
@@ -265,7 +258,7 @@ session_start();
       <ul class="info">
           <li class="row">
             <div class="col-md-5 col-sm-6 col-xs-12"><label>Город:</label></div>
-            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[10]; ?></label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[12]; ?></label></div>
           </li> 
 
           <li class="row">
@@ -282,6 +275,24 @@ session_start();
             <div class="col-md-5 col-sm-6 col-xs-12"><label>Описание:</label></div>
             <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row[6]; ?></label></div>
           </li> 
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label>Эл.почта:</label></div>
+          <?
+
+             $result3 = mysqli_query($connection, "SELECT * FROM users WHERE id=".$row[10]);
+              $row3 =mysqli_fetch_row($result3);
+
+              
+          ?>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><? echo $row3[4]; ?></label></div>
+
+          </li>
+
+          <li class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12"><label></label></div>
+            <div class="col-md-7 col-sm-6 col-xs-12"><label><a href="">Написать личгое сообщение</a></label></div>
+          </li>  
         </ul>
         </div> 
 

@@ -1,35 +1,14 @@
 <?php
 
-
-
 $connection = mysqli_connect("localhost", "root", "", "buronahodok");
+
 mysqli_set_charset($connection,'utf8');
 
-if (isset($_POST['sign_in'])) {
-
-  
-  $result = mysqli_query($connection, "SELECT count(id),login,id FROM users WHERE login='".$_POST['login']."' AND pass='".md5($_POST['pass'])."'");
- while ($row =mysqli_fetch_row($result)) {
-
- 	if ($row[0] == 1) {
- 		 session_start();
-    $_SESSION['login'] = $row[1];
- 		$_SESSION['user_id'] = $row[2];
- 		$error = '<span class="error_s">Вы усрешно вошли в свой акк</span>';
- 		header('location:index.php');
-
-  }
-
-  else{
-
-  	$error = '<span class="error_s">Логин или пароль введён не верно!</span>';
-
-  }
-  }
-}
-
+session_start();
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -55,7 +34,7 @@ if (isset($_POST['sign_in'])) {
 
 
                             <!-- HEADER -->
-  <header class="header">
+     <header class="header">
   <nav class="navbar">
     <div class="container">
     <div class="navbar-header">
@@ -95,19 +74,8 @@ if (isset($_POST['sign_in'])) {
     }
     else {
       ?>
-
-      <a href="chek_in.php"><div class="user"><img class="account_icon" src="img/acc.jpg"> Мой профиль</div></a>
-
-
-      <a <? if (isset($_SESSION['login'])) { echo 'href="ad.php"';} else{echo 'href="chek_in.php"';} ?>>
-        <div class="ad">
-          <p><i class="fa fa-plus"></i> Сделать Объявление</p>
-        </div>
-      </a>
-
-      <div class="language">
-        Кырг / Русс
-      </div>
+        <a href="sign_in.php" class="btn btn-primary border" id="login">Войти</a>
+      <a href="chek_in.php" class="btn btn-success border" id="reg">Зарегистрироваться</a>
     <?
     }
     ?>
@@ -143,6 +111,7 @@ if (isset($_POST['sign_in'])) {
     </div>
   </nav>
 </section>
+
 
   
 <div id="collapseTwo" class="collapse">
@@ -206,26 +175,56 @@ if (isset($_POST['sign_in'])) {
 </div>
 
 
-
                                   <!-- NAVIGATION -->
 
 <div class="container">
   <div class="row">
     <ol class="breadcrumb">
       <li><a href="index.php">Главная</a></li>
+      <li class="active">Мои объявления</li>
   </ol>
   </div>
 </div>
-  <div id="login" class="form">
-    <form action="sign_in.php" method="POST" class="login-form">
-      <h2>Вход</h2>
-      <input type="text" placeholder="Логин" name="login">
-      <input type="password" placeholder="Пароль" name="pass">
-      <? echo $error; ?>
-      <button type="submit" name="sign_in">Войти</button>
-    </form>
-    <div style="margin-top: 10px"><span style="color: grey">Нет аккаунта?</span> <span style="text-align: right;"><a href="chek_in.php">Зарегистрироваться</a></span></div>
+
+
+
+ <section class="top">
+  <div class="container">
+    <div class="row">
+      <h1 class="center zag">Мой профиль</h1>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="row">
+          <div class="rt">
+              <ul class="col-xs-12 wow fadeInUp glav center">
+                <li class="col-xs-4"><b>Имя</b></li>
+                <li class="col-xs-4"><b>Номер</b></li>
+                <li class="col-xs-4"><b>Эл. адрес</b></li>
+              </ul>
+            </div>
+          <? 
+
+          $result = mysqli_query($connection, "SELECT * FROM users WHERE id=".$_SESSION['user_id']);
+           while ($row =mysqli_fetch_row($result)) {
+
+          ?>
+            <div class="rt">
+              <ul class="col-xs-12 wow fadeInUp glav center">
+                <li class="col-xs-4"><? echo $row[1]; ?></li>
+                <li class="col-xs-4"><? echo $row[3]; ?></li>
+                <li class="col-xs-4"><? echo $row[4]; ?></li>
+              </ul>
+            </div>
+          <?
+          }
+          ?>
+          </div>
+        </div>
+    </div>
   </div>
+</section> 
+
+                          
+
 
 
 <footer class="footer">
@@ -242,9 +241,42 @@ if (isset($_POST['sign_in'])) {
 
 
 
-</body>
-</html>
+
+
+
 
 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+</body>
+<script type="text/javascript">
+  
+function login() {
+  var login = document.getElementById("login").style.display = 'block';
+}
+function reg() {
+  var reg = document.getElementById("reg").style.display = 'block';
+}
+
+</script>
+
+<script type="text/javascript">
+  function exit() {
+    if(confirm('Вы точно хотите выйти?') == true) {
+      document.getElementById("ex").href = 'session_destroy.php';
+    }
+  }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
