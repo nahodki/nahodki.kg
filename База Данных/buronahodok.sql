@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 10 2018 г., 16:13
+-- Время создания: Июн 11 2018 г., 09:33
 -- Версия сервера: 5.5.41-log
 -- Версия PHP: 5.3.29
 
@@ -37,38 +37,16 @@ CREATE TABLE IF NOT EXISTS `ads` (
   `id_category` int(11) NOT NULL,
   `picture` varchar(250) NOT NULL,
   `vip` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Дамп данных таблицы `ads`
 --
 
-INSERT INTO `ads` (`id`, `data`, `category`, `caption`, `city`, `nomer`, `des`, `id_category`, `picture`, `vip`) VALUES
-(102, '2018-05-02', 1, 'ASCASC', '1', '+996ASCASC', 'ASCASCASCCAC', 4, 'picture102.jpg', 0),
-(103, '2018-05-02', 2, 'Потерял паспорт', '1', '+9967777777777', 'вфмв мфвымвымвмыфммымы мммфвыфммм м ммвм вмфым', 1, 'picture103.jpg', 0),
-(104, '2018-05-04', 2, 'Потерял видеокамеру', '1', '+99677777777', 'апмрп цфрвпм вмрпыв рмв морвпм оврымп ыврмп вырмаыв брмывбмыворм ыврм', 3, 'picture104.jpg', 0),
-(105, '2018-05-03', 2, 'Байстан лох', '1', '+9960556251115', 'Вчера вечером потерялся кот. Его звали Байстан.\r\nОтличительные черты:умеет говорить, лохматый лох, \r\nпездюк, палит всех вокруг, черный как уголь, долбит. Короче, если найдете Убейте на месте.\r\n', 2, 'picture105.jpg', 0),
-(106, '2018-05-04', 1, 'Нашёл Кубат ЛОХА', '1', '+99677777777', 'Нашёл Кубат ЛОХА.В данный момент он в моём доме.Хотел меня убить, но отправил в нокаут левым ХУКОМ))))', 2, 'picture106.jpg', 1),
-(107, '2018-05-01', 1, 'efwefw', '1', '+996wefwef', 'wefwefwfewefwefwefwefweffew', 6, 'picture107.jpg', 0),
-(111, '2018-05-11', 1, 'ascsac', '2', '+996ascasc', 'ascascasccacascascasc', 4, 'default.png', 0),
-(112, '2018-05-15', 2, 'ascasc', '2', '+996ascasc', 'ascascasc', 4, 'picture112.jpg', 0),
-(113, '2018-05-05', 1, 'sd sd ', '1', '+996sd sd ', 'ds sd sd sd ds ', 3, 'default.png', 0),
-(114, '2018-05-05', 1, 'sd sd ', '1', '+996sd sd ', 'ds sd sd sd ds ', 3, 'default.png', 0),
-(115, '2018-05-03', 1, 'sdcdc', '2', '+996sdcsdc', 'sdcdsc', 3, 'default.png', 0),
-(116, '2018-05-30', 1, 'wecwc', '1', '+996wecw', 'wecew', 3, 'default.png', 0),
-(117, '2018-05-10', 1, 'sdc', '1', '+996sdc', 'sdcdsc', 3, 'default.png', 0),
-(118, '2018-05-08', 1, 'hebgehsrbve', '3', '+99620515115', 'ervreververvarvaevraer', 6, 'picture118.jpg', 0),
-(119, '2018-05-06', 2, 'WDWDWDWD', '1', '+996WDWDWD', 'WDWDWDWDWDWDW', 1, 'picture119.jpg', 0),
-(120, '2018-05-10', 1, 'sdcdscs', '2', '+996sdcdscdscs', 'scaawca2gsdgs gvs dgvsvgsdgv sdgvsdj vsdu vsgvskdgv daksugv jdqv d vgdsuvg dsvgdsvgd vkdgv dsgvd sjvg sdqvgsdq vgadsugvqdsauvgqdasuqadsuqgvsadug2v vbk bvkasjdb vk dashbv kadsj vbs dajvb hdjsvh dvas jhv d havb kd bda kv kb dhb hdv dvs kbjv jdav kvajds', 1, 'picture120.jpg', 0),
-(121, '0000-00-00', 1, '12312312312312312', '2', '+996123123123', '12312312', 3, 'default.png', 0),
-(122, '2018-05-10', 1, '1', '2', '+996111', '111', 2, 'default.png', 0),
-(123, '2017-12-14', 1, '111', '1', '+996111', '111', 2, 'default.png', 0),
-(124, '2018-05-08', 1, '00', '1', '+9963453', '345345345', 2, 'default.png', 1),
-(125, '0000-00-00', 1, '345', '1', '+996345', '345345345345', 3, 'default.png', 0),
-(126, '0000-00-00', 1, '0000', '1', '+99600', '0000000', 2, 'default.png', 0),
-(127, '0000-00-00', 1, '77777', '1', '+996777', '777', 3, 'default.png', 0),
-(128, '0000-00-00', 1, 'Кукукуку', '2', '+996454', '456456456', 1, 'default.png', 1);
+INSERT INTO `ads` (`id`, `data`, `category`, `caption`, `city`, `nomer`, `des`, `id_category`, `picture`, `vip`, `id_user`) VALUES
+(1, '0000-00-00', 1, 'Потерял собаку', '1', '+9967777777777', 'ebevrtvvrvrvt4', 1, 'default.png', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -88,9 +66,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `found`) VALUES
-(1, 'Документы', '6'),
-(2, 'Животные', '8'),
-(3, 'Электроника', '16'),
+(1, 'Документы', '24'),
+(2, 'Животные', '11'),
+(3, 'Электроника', '17'),
 (5, 'Бытовые вещи', '0'),
 (6, 'Спортинвентарь', '2'),
 (7, 'Другое', '1');
@@ -196,14 +174,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `number` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`, `number`, `email`) VALUES
-(1, 'baystan', 'e4cd1175d85bef0786e1d82a255f212f', '0771390338', 'baystan.@gmail.com');
+(1, 'baystan', 'e4cd1175d85bef0786e1d82a255f212f', '0771390338', 'baystan.@gmail.com'),
+(2, 'kuba', 'e4cd1175d85bef0786e1d82a255f212f', '0777111111111', 'tashkulov@gmail.com'),
+(3, 'bay', '1fccb567a44880e8665b7cb9d0f97271', '0771390338', 'bas@gmail.com'),
+(4, 'baay', '35e47c8a7e27d512b4cf3b052ffe1960', '0771390338', 'ja@gmail.com'),
+(5, 'doni', '202cb962ac59075b964b07152d234b70', '7713939', 'asasx@gmail.com'),
+(6, 'lev', '202cb962ac59075b964b07152d234b70', '0771390338', 'asasx@gmail.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
